@@ -10,7 +10,7 @@
 body{
     background-image: url('images/background.jpg');
     background-size:cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -130,15 +130,19 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
+  .signupbtn {
+     width: 100%;
+  }
 }
-
 </style>
 
 </head>
 <body>
 
 <div class="navbar">
-  <a href="#home">Home</a>
+  <a href="#default">
+    <img src="images/logo.png">
+  </a>
   <div class="login">
 
     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
@@ -171,20 +175,52 @@ span.psw {
         </div>
     </form>
     </div>
+  </div>
+    <div class= "sign-up">
+        <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
+        <div id="id02" class="modal">
 
-</div>
-  
-  <div class="dropdown">
-    <button class="dropbtn">Dropdown 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Nam</a>
-      <a href="#">Do</a>
-      <a href="#">San</a>
+            <form class="modal-content" action="/action_page.php">
+            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+              <div class="container">
+                  <h1>Sign Up</h1>
+                  <p>Please fill in this form to create an account.</p>
+                  <hr>
+                  <label for="email"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" name="email" required>
+          
+                  <label for="psw"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="psw" required>
+          
+                  <label for="psw-repeat"><b>Repeat Password</b></label>
+                  <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                  
+                  <label>
+                  <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                  </label>
+          
+                  <div class="clearfix">
+                  <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                  <button type="submit" class="signupbtn">Sign Up</button>
+                  </div>
+              </div>
+            </form>
+      </div>
     </div>
-  </div> 
+
+    <div class="dropdown">
+      <button class="dropbtn">Profile
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="#">Profile Management</a>
+        <a href="#">Fuel Quote History</a>
+      </div>
+    </div> 
+
+ 
 </div>
+
 
 <div class="home-screen">
     <h1>
@@ -193,9 +229,12 @@ span.psw {
 
 </div>
 
+
+
+
 <script>
     // Get the modal
-    var modal = document.getElementById('id01');
+    var modal = document.getElementById('id02');
     
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
@@ -203,7 +242,14 @@ span.psw {
             modal.style.display = "none";
         }
     }
+    
+    function profileClick()
+    {
+      console.log(5 + 6);
+    }
+
 </script>
+
 
 
 </body>
