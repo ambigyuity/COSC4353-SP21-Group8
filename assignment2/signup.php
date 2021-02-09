@@ -1,7 +1,3 @@
-<?php
-  session_start();
-?>
-
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -315,84 +311,62 @@ img {vertical-align: middle;}
 .button:hover {
   background-color: #555;
 }
-
-
 </style>
 <body>
 
+<?php
 
-<div class="navbar">
-    <a href="index.php"><i class="fa fa-fw fa-home"></i> Home</a> 
+include_once 'navbar.php'
 
-    <?php
-      if(isset($_SESSION['USERID']))
-      { 
-        echo '<a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile Management</a>
-        <a href="calculator.php"><i class="fa fa-fw fa-calculator"></i> Quote Calculator</a> 
-        <a href="history.php"><i class="fa fa-fw fa-clipboard"></i> Fuel Quote History</a> ';
-        echo '
-        <div class= "sign-up">
-        <a href="includes/logout.inc.php" class="button">Logout</a>
-        </div>';
+?>
 
-      }
-      else{
-        echo '
-        <div class= "sign-up">
-        <a href="signuppage.php" class="button">Sign Up</a>
+<div class= "sign-up">
+    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
+    <div id="id02" class="modal">
+
+        <form class="modal-content" action="signup.inc.php">
+        <div class="container">
+            <h1>Sign Up</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+            <label for="email"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="email" required>
+    
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+    
+            <label for="psw-repeat"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+            
+            <label>
+            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+            </label>
+    
+            <div class="clearfix">
+            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+            <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
         </div>
-        <div class= "login">
-        <a href="loginpage.php" class="button">Log In</a>
-        </div>';
-      }
-
-
-    ?>
-  
+        </form>
+    </div>
 </div>
 
-<?php
-  if(isset($_GET["error"]))
-  {
-    if($_GET["error"]== "usernameExists")
-    {
-      echo "<p class='error'>Username Already Exists! Please Try Again!</p>";
+<script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
-    else if($_GET["error"]== "pwdMatchFalse")
+    
+    function profileClick()
     {
-      echo "<p class='error'>Passwords do not match! Please Try Again!</p>";
+      console.log(5 + 6);
     }
-    else if($_GET["error"]== "stmtFail")
-    {
-      echo "<p class='error'>Something went wrong try again! Please Try Again!</p>";
-    }
-    else if($_GET["error"]== "usernameDNE")
-    {
-      echo "<p class='error'>Username does not exist! Please Try Again!</p>";
-    }
-    else if($_GET["error"]== "WrongPassword")
-    {
-      echo "<p class='error'>Wrong Password! Please Try Again!</p>";
-    }
-    else if($_GET["error"]== "noErrorSignUpSuccessful")
-    {
-      echo "<p>Sign-up Successful!</p>";
-    }
-  }
+</script>
 
-
-?>
-
-<?php
-  if(isset($_GET["LoginSuccessful"]))
-  {
-      echo "<p class='error'>Successfully logged in! Welcome!</p>";
-      echo "<p>" . $_SESSION['USERID'] . "</p>";
-  }
-
-  if(isset($_GET["updateSuccess"]))
-  {
-      echo "<p class='error'>Successfully Updated!</p>";
-  }
-
-?>
+</body>
+</html> 

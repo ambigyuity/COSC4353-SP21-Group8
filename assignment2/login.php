@@ -1,7 +1,3 @@
-<?php
-  session_start();
-?>
-
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -315,84 +311,64 @@ img {vertical-align: middle;}
 .button:hover {
   background-color: #555;
 }
-
-
 </style>
 <body>
 
+<?php
 
-<div class="navbar">
-    <a href="index.php"><i class="fa fa-fw fa-home"></i> Home</a> 
+include_once 'navbar.php'
 
-    <?php
-      if(isset($_SESSION['USERID']))
-      { 
-        echo '<a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile Management</a>
-        <a href="calculator.php"><i class="fa fa-fw fa-calculator"></i> Quote Calculator</a> 
-        <a href="history.php"><i class="fa fa-fw fa-clipboard"></i> Fuel Quote History</a> ';
-        echo '
-        <div class= "sign-up">
-        <a href="includes/logout.inc.php" class="button">Logout</a>
-        </div>';
+?>
 
-      }
-      else{
-        echo '
-        <div class= "sign-up">
-        <a href="signuppage.php" class="button">Sign Up</a>
-        </div>
-        <div class= "login">
-        <a href="loginpage.php" class="button">Log In</a>
-        </div>';
-      }
-
-
-    ?>
+<div class="login">
   
+      <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+  
+      <div id="id01" class="modal">
+      
+      <form class="modal-content animate" action="login.inc.php" method="post">
+  
+          <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="images/img_avatar2.png" alt="Avatar" class="avatar">
+          </div>
+  
+          <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+  
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+              
+          <button type="submit">Login</button>
+  
+          <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+          </div>
+  
+          <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          </div>
+      </form>
+      </div>
 </div>
-
-<?php
-  if(isset($_GET["error"]))
-  {
-    if($_GET["error"]== "usernameExists")
-    {
-      echo "<p class='error'>Username Already Exists! Please Try Again!</p>";
+<script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
-    else if($_GET["error"]== "pwdMatchFalse")
+    
+    function profileClick()
     {
-      echo "<p class='error'>Passwords do not match! Please Try Again!</p>";
+      console.log(5 + 6);
     }
-    else if($_GET["error"]== "stmtFail")
-    {
-      echo "<p class='error'>Something went wrong try again! Please Try Again!</p>";
-    }
-    else if($_GET["error"]== "usernameDNE")
-    {
-      echo "<p class='error'>Username does not exist! Please Try Again!</p>";
-    }
-    else if($_GET["error"]== "WrongPassword")
-    {
-      echo "<p class='error'>Wrong Password! Please Try Again!</p>";
-    }
-    else if($_GET["error"]== "noErrorSignUpSuccessful")
-    {
-      echo "<p>Sign-up Successful!</p>";
-    }
-  }
+</script>
 
-
-?>
-
-<?php
-  if(isset($_GET["LoginSuccessful"]))
-  {
-      echo "<p class='error'>Successfully logged in! Welcome!</p>";
-      echo "<p>" . $_SESSION['USERID'] . "</p>";
-  }
-
-  if(isset($_GET["updateSuccess"]))
-  {
-      echo "<p class='error'>Successfully Updated!</p>";
-  }
-
-?>
+</body>
+</html> 
