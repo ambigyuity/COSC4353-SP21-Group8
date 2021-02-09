@@ -9,15 +9,7 @@ if (isset($_POST["LIsubmit"]))
     require_once 'functions.inc.php';
 
 
-    if(incorrectLogin($conn, $username, $password)=== false)
-    {
-        header("location: ../loginpage.php?error=incorrectlogin");
-        exit();
-    }
-    else
-    {
-        loginUser($conn, $username, $password);
-    }
+    incorrectLogin($conn, $username, $password);
 
 
 
