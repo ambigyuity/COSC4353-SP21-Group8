@@ -29,6 +29,25 @@ function usernameCheck($conn, $username)
 
 }
 
+function getAddress($conn, $USERID)
+{
+    $sql= "SELECT ADDRESS1 from profiles where USERID=?;";
+    $stmt= mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../signuppage.php?error=stmtFail");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $USERID);
+    mysqli_stmt_execute($stmt);
+
+    $resultsData= mysqli_stmt_get_result($stmt);
+    $address= mysqli_fetch_assoc($resultsData);
+    $address1= $address['ADDRESS1'];
+    return $address1;
+}
 
 function pwdNotSame($password, $pwdRepeat)
 {
@@ -121,6 +140,25 @@ function updateInformation($conn, $USERID, $fullname, $address, $altaddress, $ci
     mysqli_stmt_close($stmt);
     header("location: ../profile.php?UpdateSuccessful");
     exit();
-    return $sql;
 }
+
+function insertQuote($conn, $USERID,$gallons, $dAddress, $dDate, $sPrice, $tPrice)
+{
+    $sql= 'INSERT INTO quotes (USERID, GALLONS, ADDRESS1, SCHEDDATE, SUGGESTED, TOTAL) VALUES (?,?,?,?,?,?);';
+    $stmt= mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../index.php?error=stmtFail");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "iissdd", $USERID,$gallons, $dAddress, $dDate, $sPrice, $tPrice);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    header("location: ../index.php?quoteFilled");
+    exit();
+}
+
 ?>
