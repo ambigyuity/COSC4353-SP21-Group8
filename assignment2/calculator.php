@@ -5,8 +5,9 @@ include_once 'navbar.php'
 
 ?>
 
+
 <div class="calc">
-  <form name="myForm" action="/action_page.php" method="post">
+  <form name="myForm" action="includes/calculator.inc.php" method="post">
     <label for="fname">Gallons Requested:</label>
     <br>
     <input id="id1" type="number" min="0" required="required" name="gallons">
@@ -16,9 +17,12 @@ include_once 'navbar.php'
 
     <label for="Daddress">Delivery Address:</label>
     <br>
-    <input type="text" value="User Default Address"  class="field left" name="dAddress" readonly>
-    <br>
-
+    <?php
+      require_once 'includes/dbh.inc.php';
+      require_once 'includes/functions.inc.php';
+      $address= getAddress($conn, $_SESSION['USERID']);
+    ?>
+    <input type="text" value="<?php echo $address ?>" class="field left" name="dAddress" readonly>
     <label for="Ddate">Date:</label>
     <br>
     <input type="date" id="deliverydate" name="deliverydate" required="required">
@@ -35,7 +39,7 @@ include_once 'navbar.php'
     <input id="TAmt" type="number" name="TAmtPrice" readonly>
     <br><br>
 
-    <input type="submit" value="Submit">
+    <button type="submit" name="calcSubmit">Get Quote</button>
 
   </form>
     
