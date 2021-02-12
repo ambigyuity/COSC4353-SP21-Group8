@@ -394,5 +394,10 @@ img {vertical-align: middle;}
   {
       echo "<p class='error'>Successfully Updated!</p>";
   }
+  
+  if(isset($_GET["quoteFilled"]))
+  {
+      echo "<p class='error'>Quote filled! Check History Tab!</p>";
+  }
 
 ?>
