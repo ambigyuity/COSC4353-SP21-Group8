@@ -1,5 +1,20 @@
 <?php
 session_start();
+
+if (isset($_POST["getPrices"]))
+{
+    $gallons=$_POST["gallons"];
+    $dAddress=$_POST["dAddress"];
+    $dDate=$_POST["deliverydate"];
+    $sPrice=$_POST["suggestedprice"];
+    $tPrice=$_POST["TAmtPrice"];
+    
+    require_once 'dbh.inc.php';
+    require_once 'functions.inc.php';
+
+    showPrices($conn,$_SESSION['USERID'],$gallons, $dAddress, $dDate, $sPrice, $tPrice);
+}
+
 if (isset($_POST["calcSubmit"]))
 {
     $gallons=$_POST["gallons"];

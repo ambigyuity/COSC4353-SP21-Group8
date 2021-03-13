@@ -49,6 +49,87 @@ function getAddress($conn, $USERID)
     return $address1;
 }
 
+function showPrices($conn, $USERID,$gallons, $dAddress, $dDate, $sPrice, $tPrice)
+{
+    $sql= "SELECT ST from profiles where USERID=?;";
+    $stmt= mysqli_stmt_init($conn);
+    $currentPrice= 1.50;
+    $locationFactor=0;
+    $gallonsRequestedFactor=0;
+    $rateHistoryFactor=0;
+    $companyProfitFactor=.1;
+
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../signuppage.php?error=stmtFail");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $USERID);
+    mysqli_stmt_execute($stmt);
+
+    $resultsData= mysqli_stmt_get_result($stmt);
+    $state= mysqli_fetch_assoc($resultsData);
+    $state1= $state['ST'];
+
+    //Location Factor
+    if($state1=='TX')
+    {
+        $locationFactor=.02;
+    }
+    else
+    {
+        $locationFactor=.04;
+    }
+
+    //rateHistoryFactor
+    $sql= "SELECT * from quotes where USERID=?;";
+    $stmt= mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: ../signuppage.php?error=stmtFail");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $USERID);
+    mysqli_stmt_execute($stmt);
+
+    $resultsData= mysqli_stmt_get_result($stmt);
+    $counter= mysqli_num_rows($resultsData);
+    
+    if($counter>0)
+    {
+        $rateHistoryFactor=.01;
+    }
+    else
+    {
+        $rateHistoryFactor=0;
+    }
+
+    //Gallons Requested Factor
+    if($gallons>1000)
+    {
+        $gallonsRequestedFactor=.02;
+    }
+    else
+    {
+        $gallonsRequestedFactor=.03;
+    }
+
+    $Margin=$currentPrice*($locationFactor-$rateHistoryFactor+$gallonsRequestedFactor+$companyProfitFactor);
+    $suggestedPrice= $currentPrice+$Margin;
+    $totalPrice= $gallons*$suggestedPrice;
+
+    $_SESSION['gallons']= $gallons;
+    $_SESSION['dDate']=$dDate;
+    $_SESSION['suggestedPrice'] =   $suggestedPrice;
+    $_SESSION['totalPrice'] =   $totalPrice;
+
+    header("location: ../calculator.php");
+    exit();
+}
+
 function pwdNotSame($password, $pwdRepeat)
 {
     $result= false;
@@ -139,6 +220,7 @@ function updateInformation($conn, $USERID, $fullname, $address, $altaddress, $ci
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../profile.php?UpdateSuccessful");
+    $_SESSION['UPDATED']=TRUE;
     exit();
 }
 
