@@ -328,7 +328,6 @@ img {vertical-align: middle;}
       if(isset($_SESSION['USERID']))
       { 
         echo '<a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile Management</a>
-        <a href="calculator.php"><i class="fa fa-fw fa-calculator"></i> Quote Calculator</a> 
         <a href="history.php"><i class="fa fa-fw fa-clipboard"></i> Fuel Quote History</a> ';
         echo '
         <div class= "sign-up">
@@ -344,6 +343,11 @@ img {vertical-align: middle;}
         <div class= "login">
         <a href="loginpage.php" class="button">Log In</a>
         </div>';
+      }
+
+      if(isset($_SESSION['UPDATED']))
+      {
+        echo '<a href="calculator.php"><i class="fa fa-fw fa-calculator"></i> Quote Calculator</a> ';
       }
 
 
