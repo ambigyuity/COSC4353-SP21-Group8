@@ -13,6 +13,7 @@ How to run:
 
 How to run test case:
 -Install PHPUnit. Make sure PHP and PHPUnit versions are compatible.
+-Make sure phpunit.xml file is in main folder. Make sure unittest folder with tests are present. Make sure vendor folder is present.
 -Launch 'cmd'. 
--Navigate to folder containing test cases
+-Navigate to folder in cmd
 -Run line: phpunit --coverage-text
