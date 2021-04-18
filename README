@@ -7,8 +7,30 @@ How to run:
 -Create folder '4353Website' into 'C:\xampp\htdocs'.
 -Move repository code from assignment 2 into C:\xampp\htdocs\4353Website. 
 -Launch XAMPP. Start Apache and MySQL
--Create database named '4353softdes' in http://localhost/phpmyadmin/sql.php on browser
+-Create database named '4353softdes' in http://localhost/phpmyadmin on browser
 -Run SQL commands to create tables
+create table users(USERID INT(6) AUTO_INCREMENT PRIMARY KEY,
+ USERNAME VARCHAR(30) NOT NULL,
+ PSW VARCHAR(100) NOT NULL
+);
+CREATE TABLE profiles(USERID INT NOT NULL,
+ FULLNAME VARCHAR(50) NOT NULL,
+ ADDRESS1 VARCHAR(100) NOT NULL,
+ ADDRESS2 VARCHAR(100),
+ CITY VARCHAR(100) NOT NULL,
+ ST VARCHAR(2) NOT NULL,
+ ZIP INT(9) NOT NULL
+);
+create table quotes(
+ QUOTEID INT NOT NULL AUTO_INCREMENT,
+ USERID INT NOT NULL,
+ GALLONS INT NOT NULL,
+ ADDRESS1 VARCHAR(100) NOT NULL,
+ SCHEDDATE TIMESTAMP NOT NULL,
+ SUGGESTED DOUBLE NOT NULL,
+ TOTAL DOUBLE NOT NULL,
+ PRIMARY KEY(QUOTEID)
+);
 -Open http://localhost/4353Website/index.php on browser
 
 How to run test case:
