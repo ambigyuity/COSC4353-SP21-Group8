@@ -13,7 +13,7 @@ How to run:
 
 How to run test case:
 -Install PHPUnit. Make sure PHP and PHPUnit versions are compatible.
--Make sure phpunit.xml,composer.json,composer.lock file is in main folder. Make sure unittest folder with tests are present. Make sure vendor folder is present. 
+-Make sure phpunit.xml,composer.json,composer.lock file is in main folder. Make sure unittest folder with tests are present. Make sure vendor folder is present. All in C:\xampp\
 -XAMPP\php\pear\phpunit\Framework\Comparator\DOMDocument.php line 86 should be public function assertEquals($expected, $actual, $delta = 0, $canonicalize = FALSE, $ignoreCase = FALSE,array &$processed = array())
    -if not, use composer update or manually write it in.
 -Launch 'cmd'. 
